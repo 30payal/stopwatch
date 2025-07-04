@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stopwatch</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 100px;
+    }
+    h1 {
+      font-size: 40px;
+    }
+    #display {
+      font-size: 50px;
+      margin: 20px 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Stopwatch</h1>
+  <div id="display">00:00:00</div>
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  <button onclick="reset()">Reset</button>
+
+  <script>
+    let hr = 0, min = 0, sec = 0;
+    let timer = false;
+
+    function start() {
+      if (!timer) {
+        timer = true;
+        run();
+      }
+    }
+
+    function stop() {
+      timer = false;
+    }
+
+    function reset() {
+      timer = false;
+      hr = 0; min = 0; sec = 0;
+      document.getElementById('display').innerText = "00:00:00";
+    }
+
+    function run() {
+      if (timer) {
+        sec++;
+        if (sec == 60) {
+          sec = 0;
+          min++;
+        }
+        if (min == 60) {
+          min = 0;
+          hr++;
+        }
+
+        let hStr = hr < 10 ? "0" + hr : hr;
+        let mStr = min < 10 ? "0" + min : min;
+        let sStr = sec < 10 ? "0" + sec : sec;
+
+        document.getElementById('display').innerText = hStr + ":" + mStr + ":" + sStr;
+
+        setTimeout(run, 1000);
+      }
+    }
+  </script>
+</body>
+</html>
